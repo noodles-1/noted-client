@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --dark-background: rgba(30, 30, 30, 0.7);
+    --background: rgba(50, 50, 50, 0.7);
+    --light-background: rgba(155, 155, 155, 0.7);
+    
+    background-repeat: no-repeat;
+    background-image: url(background.jpg)
+}
+
+/* Main components */
+.wrapper {
+    box-shadow: 0 10px 15px rgb(0 0 0 / 40%);
+    @apply
+        mt-[80px]
+        mx-auto
+        h-[550px]
+        w-[900px]
+        rounded-lg
+        flex
+}
+
+.blur-effect {
+    backdrop-filter: blur(33px);
+}
+
+/* Blurred background colors */
+.blur-dark-bg {
+    background-color: var(--dark-background);
+}
+
+.blur-bg {
+    background-color: var(--background);
+}
+
+.blur-light-bg {
+    background-color: var(--light-background); 
+}
