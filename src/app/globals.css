@@ -8,18 +8,18 @@
     --light-background: rgba(155, 155, 155, 0.7);
     
     background-repeat: no-repeat;
-    background-image: url(background.jpg)
+    background-image: url('/background.jpg')
 }
 
 /* Main components */
 .wrapper {
-    box-shadow: 0 10px 15px rgb(0 0 0 / 40%);
+    box-shadow: 0 10px 15px rgb(0 0 0 / 60%);
     @apply
-        mt-[80px]
-        mx-auto
-        h-[550px]
-        w-[900px]
-        rounded-lg
+        h-full
+        w-full
+        sm:h-3/4
+        sm:w-[900px]
+        sm:rounded-lg
         flex
 }
 

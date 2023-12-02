@@ -1,0 +1,44 @@
+.notes {
+    @apply
+        h-full
+        w-full 
+        sm:min-w-[300px]
+        sm:grow 
+        text-gray-100
+        py-[50px] 
+        px-[60px] 
+        sm:rounded-br-[12px] 
+        sm:rounded-tr-[12px]
+}
+
+.home {
+    transition: transform 0.2s;
+    @apply
+        h-full
+        w-4/5
+        sm:w-[240px]
+        text-gray-100 
+        py-[50px] 
+        px-[30px] 
+        sm:rounded-bl-[12px]
+        sm:rounded-tl-[12px]
+        absolute
+        sm:relative
+        z-10
+        top-0
+        left-0
+        translate-x-[-100%]
+        sm:translate-x-0
+}
+
+.home-show {
+    @apply
+        translate-x-0
+}
+
+/* Button components */
+.menu-btn {
+    height: 24px;
+    width: 24px;
+    margin-bottom: 20px;
+}

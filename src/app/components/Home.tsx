@@ -1,8 +1,17 @@
+'use client'
+
 import { Profile } from "@/app/components"
+import { useDispatch, useSelector } from "react-redux"
+import './styles.css'
+import { mobileHide } from "@/redux/shown"
 
 export function Home() {
+    const { shown } = useSelector((state: any) => state.shown)
+    const dispatch = useDispatch()
+
     return (
-        <div className="blur-effect blur-dark-bg h-full w-[240px] text-gray-100 flex py-[26px] px-[30px] rounded-bl-[12px] rounded-tl-[12px]">
+        <div className={`blur-effect blur-dark-bg home ${shown ? 'home-show': ''}`}>
+            <button onClick={() => dispatch(mobileHide())}> hide me </button>
             <Profile />
         </div>
     )
