@@ -6,9 +6,55 @@
     --dark-background: rgba(30, 30, 30, 0.7);
     --background: rgba(50, 50, 50, 0.7);
     --light-background: rgba(155, 155, 155, 0.7);
+    --clerk-link: rgba(82, 151, 236, 0.7);
     
     background-repeat: no-repeat;
     background-image: url('/background.jpg')
+}
+
+/* Clerk components */
+.cl-internal-b3fm6y,
+.cl-internal-uyu30o {
+    display: none;
+}
+
+.cl-card {
+    background-color: var(--dark-background);
+    backdrop-filter: blur(33px);
+}
+
+.cl-signIn-start,
+.cl-signUp-start {
+    position: absolute;
+    z-index: 50;
+    transform: translate(-50%, -50%);
+    top: 45%;
+    left: 50%;
+}
+
+.cl-card a {
+    color: var(--clerk-link);
+}
+
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(67, 67, 67);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #383838;
 }
 
 /* Main components */

@@ -1,6 +1,6 @@
 'use client'
 
-import { mobileShow } from "@/redux/shown"
+import { mobileShow } from "@/redux/slices/shown"
 import { useDispatch } from "react-redux"
 
 export function Menu() {

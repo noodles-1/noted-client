@@ -1,11 +1,11 @@
-import { Home, Notes } from "@/app/components";
+import { Navbar, EmptyNotes } from "@/app/components";
 
 export default function Main() {
   return (
     <main className="flex items-center justify-center h-screen">
         <div className="wrapper">
-            <Home />
-            <Notes />
+            <Navbar />
+            <EmptyNotes />
         </div>
     </main>
   )
