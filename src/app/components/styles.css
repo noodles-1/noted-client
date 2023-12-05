@@ -4,7 +4,6 @@
         w-full 
         sm:min-w-[300px]
         sm:grow 
-        text-gray-100
         px-[40px]
         py-[50px] 
         sm:px-[60px] 
@@ -17,8 +16,7 @@
     @apply
         h-full
         w-4/5
-        sm:w-[240px]
-        text-gray-100 
+        sm:w-[280px]
         py-[50px] 
         px-[30px] 
         sm:rounded-bl-[12px]
