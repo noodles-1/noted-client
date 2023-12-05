@@ -1,4 +1,4 @@
-import { Menu } from '@/app/components'
+import { AddNote, Menu } from '@/app/components'
 import './styles.css'
 
 export function AllNotes() {
@@ -6,6 +6,7 @@ export function AllNotes() {
         <div className="blur-effect notes blur-bg">
             <Menu />
             <h1> All notes </h1>
+            <AddNote />
         </div>
     )
 }

@@ -41,3 +41,36 @@
     width: 24px;
     margin-bottom: 20px;
 }
+
+.add-note-btn {
+    background-color: var(--background);
+    box-shadow: 0 10px 15px rgb(0 0 0 / 60%);
+    @apply
+        absolute
+        rounded-[100%]
+        sm:rounded-[8px]
+        flex
+        justify-center
+        items-center
+        bottom-0
+        right-0
+        my-[50px]
+        mx-[50px]
+        py-[14px]
+        sm:py-[2px]
+        px-[14px]
+        cursor-pointer
+        text-[14px]
+}
+
+.add-note-btn:hover {
+    background-color: var(--dark-background);
+}
+
+.add-note-btn img {
+    @apply
+        h-[30px]
+        w-[30px]
+        sm:h-[12px]
+        sm:w-[12px]
+}
