@@ -26,7 +26,7 @@ export function Navbar() {
                 <Link href="/home/pinned" onClick={() => dispatch(mobileHide())}>
                     <h1> Pinned </h1>
                 </Link>
-                <Link href="/settings" onClick={() => dispatch(mobileHide())}>
+                <Link href="/home/settings" onClick={() => dispatch(mobileHide())}>
                     <h1> Settings </h1>
                 </Link>
             </div>

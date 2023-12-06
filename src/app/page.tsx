@@ -1,12 +1,12 @@
-import { Navbar, EmptyNotes } from "@/app/components";
+import { EmptyNotes, Navbar } from "@/app/components";
 
-export default function Main() {
+export default function Page() {
     return (
-        <main className="flex items-center justify-center h-screen">
+        <div className="flex items-center justify-center h-screen">
             <div className="wrapper">
                 <Navbar />
                 <EmptyNotes />
             </div>
-        </main>
+        </div>
     )
 }
