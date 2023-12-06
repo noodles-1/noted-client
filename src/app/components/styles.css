@@ -165,12 +165,12 @@ button:active .ql-fill,
 
 .ql-editor ul[data-checked="false"] > li::before {
     content: '\2E3A';
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: white;
 }
 
 .ql-editor ul[data-checked="true"] li::before {
     content: '\2713';
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: white;
 }
