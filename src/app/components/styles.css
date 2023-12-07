@@ -2,7 +2,6 @@
 
 .notes {
     @apply
-        h-full
         w-full 
         sm:min-w-[300px]
         sm:grow 
@@ -11,6 +10,8 @@
         sm:px-[60px] 
         sm:rounded-br-[12px] 
         sm:rounded-tr-[12px]
+        flex
+        flex-col
 }
 
 .home {
@@ -37,6 +38,44 @@
         translate-x-0
 }
 
+/* Note components */
+.note {
+    @apply
+        h-[240px]
+        relative
+        rounded-[12px]
+}
+
+.note-hover {
+    transition: 100ms ease-in-out;
+    box-shadow: inset 0 0 0 rgb(0 0 0 / 60%);
+    @apply
+        h-full
+        w-full
+        absolute
+        top-0
+        left-0
+        opacity-0
+        rounded-[12px]
+}
+
+.note-hover:hover {
+    box-shadow: inset 0 0 60px rgb(0 0 0 / 60%);
+    @apply
+        opacity-100
+}
+
+.note-list-grid {
+    @apply
+        grid
+        grid-cols-2
+        lg:grid-cols-3
+        gap-x-[10px]
+        gap-y-[10px]
+        sm:gap-x-[20px]
+        sm:gap-y-[20px]
+}
+
 /* Button components */
 .menu-btn {
     height: 24px;
@@ -46,7 +85,7 @@
 
 .add-note-btn {
     background-color: var(--background);
-    box-shadow: 0 10px 15px rgb(0 0 0 / 60%);
+    box-shadow: 0 0 15px rgb(0 0 0 / 60%);
     @apply
         absolute
         rounded-[100%]
@@ -88,6 +127,12 @@
         w-0
 }
 
+.note-quill .quill-editor {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .quill > .ql-container > .ql-editor.ql-blank::before{
     font-style: normal;
     @apply
@@ -101,14 +146,32 @@
     border: none !important;
 }
 
+.note-quill .ql-toolbar {
+    display: none !important;
+}
+
 .ql-toolbar {
     padding: 0 !important;
     margin-top: 20px !important;
     position: absolute !important;
-    bottom: 80px;
+    @apply
+        bottom-[120px]
+        sm:bottom-[80px]
 }
 
-.ql-editor {
+.note-quill .ql-editor {
+    font-family: 'Inter', sans-serif;
+    height: 220px;
+    color: white !important;
+    padding: 14px 0 !important;
+    overflow: hidden !important;
+    @apply
+        text-[16px]
+        sm:text-[14px]
+}
+
+
+.edit-note-quill .ql-editor {
     font-family: 'Inter', sans-serif;
     color: white !important;
     padding: 20px 0 !important;

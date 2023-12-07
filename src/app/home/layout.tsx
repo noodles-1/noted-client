@@ -1,4 +1,4 @@
-import { Navbar } from "@/app/components";
+import { AddNote, Navbar } from "@/app/components";
 
 export default function HomeLayout ({ children }: { children: React.ReactNode }) {
   return (

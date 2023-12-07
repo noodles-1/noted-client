@@ -43,6 +43,9 @@
 /* width */
 ::-webkit-scrollbar {
     width: 6px;
+    @apply
+        hidden
+        sm:block
 }
   
 /* Track */
@@ -70,6 +73,7 @@
         sm:w-[900px]
         sm:rounded-lg
         flex
+        relative
 }
 
 .blur-effect {

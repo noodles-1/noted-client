@@ -1,4 +1,4 @@
-import { AddNote, Menu } from '@/app/components'
+import { Menu } from '@/app/components'
 import './styles.css'
 
 export function PinnedNotes() {
@@ -6,7 +6,6 @@ export function PinnedNotes() {
         <div className="blur-effect notes blur-bg">
             <Menu />
             <h1> Pinned notes </h1>
-            <AddNote />
         </div>
     )
 }
