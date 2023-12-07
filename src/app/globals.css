@@ -22,7 +22,7 @@
 
 .cl-card {
     background-color: var(--dark-background);
-    backdrop-filter: blur(33px);
+    backdrop-filter: blur(80px);
     box-shadow: 0 10px 15px rgb(0 0 0 / 60%);
 }
 
@@ -73,7 +73,7 @@
 }
 
 .blur-effect {
-    backdrop-filter: blur(33px);
+    backdrop-filter: blur(80px);
 }
 
 /* Blurred background colors */

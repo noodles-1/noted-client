@@ -82,9 +82,10 @@
     @apply
         text-[28px]
         sm:text-[24px]
-        bg-transparent
         outline-none
-        w-[300px]
+        bg-transparent  
+        flex-1
+        w-0
 }
 
 .quill > .ql-container > .ql-editor.ql-blank::before{
@@ -163,14 +164,14 @@ button:active .ql-fill,
     fill: rgb(67, 140, 218) !important;
 }
 
-.ql-editor ul[data-checked="false"] > li::before {
-    content: '\2E3A';
-    font-size: 1.2rem;
-    color: white;
+.ql-editor ul[data-checked="true"] li {
+    color: gray;
+}
+
+.ql-editor ul[data-checked="false"] li::before {
+    font-size: 1.35rem;
 }
 
 .ql-editor ul[data-checked="true"] li::before {
-    content: '\2713';
-    font-size: 2rem;
-    color: white;
+    font-size: 1.35rem;
 }
