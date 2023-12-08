@@ -26,6 +26,9 @@ export function Navbar() {
                 <Link href="/home/pinned" onClick={() => dispatch(mobileHide())}>
                     <h1> Pinned </h1>
                 </Link>
+                <Link href="/home/trash" onClick={() => dispatch(mobileHide())}>
+                    <h1> Trash </h1>
+                </Link>
                 <Link href="/home/settings" onClick={() => dispatch(mobileHide())}>
                     <h1> Settings </h1>
                 </Link>

@@ -1,7 +1,7 @@
-import { PinnedNotes } from "@/app/components";
+import { Notes } from "@/app/components";
 
 export default function PinnedPage() {
     return (
-        <PinnedNotes />
+        <Notes category="pinned" />
     )
 }

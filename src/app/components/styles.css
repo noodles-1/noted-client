@@ -99,8 +99,43 @@
         top-[40px]
         z-10
         rounded-[6px]
-        py-[12px]
-        px-[8px]
+        py-[4px]
+        px-[12px]
+        flex
+        flex-col
+}
+
+.dropdown div {
+    @apply
+        flex
+        items-center
+        py-[6px]
+}
+
+.dropdown h1 {
+    padding: 4px 0;
+}
+
+.dropdown img {
+    transition: 60ms ease-in-out;
+    @apply
+        h-[24px]
+        pr-[6px]
+}
+
+.pin-hover:hover .pinned-hover {
+    @apply
+        opacity-100
+}
+
+.pin-hover:hover .unpinned-hover {
+    @apply
+        opacity-0
+}
+
+.delete-hover:hover .delete-hover {
+    @apply
+        opacity-100
 }
 
 /* Button components */
@@ -122,8 +157,10 @@
         items-center
         bottom-0
         right-0
-        my-[50px]
-        mx-[50px]
+        my-[32px]
+        mx-[32px]
+        sm:my-[50px]
+        sm:mx-[50px]
         py-[14px]
         sm:py-[2px]
         px-[14px]

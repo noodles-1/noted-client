@@ -1,8 +1,8 @@
-import { Note } from "@/app/components"
+import { Note } from "@/app/components";
 
-export function AllNotesList() {
+export function NotesList({ category }: { category: String }) {
 
-    // TODO: get current user id and map all notes
+    // TODO: filter fetch by category
 
     return (
         <div className="note-list-grid">

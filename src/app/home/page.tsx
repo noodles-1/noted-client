@@ -1,7 +1,7 @@
-import { AllNotes } from "../components";
+import { Notes } from "@/app/components";
 
 export default function HomePage() {
     return (
-        <AllNotes />
+        <Notes category="all" />
     )
 }
