@@ -14,8 +14,6 @@ export function AllNotesList() {
             <Note />
             <Note />
             <Note />
-            <Note />
-            <Note />
         </div>
     )
 }

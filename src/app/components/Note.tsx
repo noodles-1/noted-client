@@ -1,12 +1,14 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { Dropdown } from '@/app/components'
 
 import 'react-quill/dist/quill.snow.css'
 
 export function Note() {
+    const [dropShown, setDropShown] = useState(false)
 
     // TODO: receive body and note id as parameter
     // TODO: link redirects to /home/edit/<note id>
@@ -22,6 +24,11 @@ export function Note() {
         ],
     }
 
+    const handleDropdown = (e: any) => {
+        e.preventDefault()
+        setDropShown(true)
+    }
+
     return (
         <div className="note blur-effect blur-dark-bg">
             <div className="mx-[20px] flex-grow">
@@ -34,8 +41,14 @@ export function Note() {
                     className="note-quill"
                 /> 
             </div>
-            <Link href="/home/edit/69" className="note-hover">
-                
+            <Link href="/home/edit/69" className={`note-hover ${dropShown ? 'note-drop-show' : ''}`}>
+                <img 
+                    src="/dropdown.png" 
+                    alt="dropdown" 
+                    className="h-[20px] w-[22px] my-[18px] mx-[12px] hover:opacity-70"
+                    onClick={handleDropdown}
+                />
+                {dropShown && <Dropdown setDropShown={setDropShown} />}
             </Link>
         </div>
     )
