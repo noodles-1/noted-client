@@ -6,14 +6,14 @@ export function NotesList({ category }: { category: String }) {
 
     return (
         <div className="note-list-grid">
-            <Note />
-            <Note />
-            <Note />
-            <Note />
-            <Note />
-            <Note />
-            <Note />
-            <Note />
+            <Note category="all" />
+            <Note category="pinned" />
+            <Note category="pinned" />
+            <Note category="all" />
+            <Note category="all" />
+            <Note category="all" />
+            <Note category="pinned" />
+            <Note category="deleted" />
         </div>
     )
 }

@@ -7,14 +7,13 @@ import { Dropdown } from '@/app/components'
 
 import 'react-quill/dist/quill.snow.css'
 
-export function Note() {
+export function Note({ category }: { category: String }) {
     const [dropShown, setDropShown] = useState(false)
 
     // TODO: receive body and note id as parameter
     // TODO: link redirects to /home/edit/<note id>
 
     const body = '<p>hello <strong>world</strong></p><ul><li>the</li><li>quick</li><li>brown</li></ul><ol><li>fox</li><li>jumps</li><li class="ql-indent-1">over</li><li class="ql-indent-1">the</li></ol><ul data-checked="false"><li>lazy</li><li><em>dog</em></li><li>the end</li></ul>'
-    const pinned = true
 
     const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
 
@@ -51,24 +50,32 @@ export function Note() {
                 />
                 {dropShown && 
                     <Dropdown setDropShown={setDropShown}>
-                        <div className="pin-hover border-b-[1px] border-b-gray-500">
-                            {pinned ? (
+                        <div className="main-hover border-b-[1px] border-b-gray-500">
+                            {category === 'pinned' && (
                                 <>
                                     <img src="/unpinned.png" alt="unpinned" className="pinned-hover" />
                                     <img src="/pinned.png" alt="unpinned" className="unpinned-hover absolute opacity-100" />
                                     <h1> Pinned </h1>
                                 </>
-                            ) : (
+                            )}
+                            {category === 'all' && (
                                 <>
                                     <img src="/unpinned.png" alt="unpinned" className="unpinned-hover" />
                                     <img src="/pinned.png" alt="unpinned" className="pinned-hover absolute opacity-0" />
                                     <h1> Pin </h1>
                                 </>
                             )}
+                            {category === 'deleted' && (
+                                <>
+                                    <img src="/restore.png" alt="restore" />
+                                    <img src="/restore-fill.png" alt="restore-fill" className="restore-hover absolute opacity-0" />
+                                    <h1> Restore </h1>
+                                </>
+                            )}
                         </div>
                         <div className="delete-hover border-b-[1px] border-b-gray-600">
                             <img src="/delete.png" alt="delete" />
-                            <img src="/delete-fill.png" alt="delete-fill" className="delete-hover absolute opacity-0" />
+                            <img src="/delete-fill.png" alt="delete-fill" className="deleted-hover absolute opacity-0" />
                             <h1> Delete </h1>
                         </div>
                     </Dropdown>

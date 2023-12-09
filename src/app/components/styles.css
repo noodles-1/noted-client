@@ -123,17 +123,22 @@
         pr-[6px]
 }
 
-.pin-hover:hover .pinned-hover {
+.main-hover:hover .pinned-hover {
     @apply
         opacity-100
 }
 
-.pin-hover:hover .unpinned-hover {
+.main-hover:hover .unpinned-hover {
     @apply
         opacity-0
 }
 
-.delete-hover:hover .delete-hover {
+.main-hover:hover .restore-hover {
+    @apply
+        opacity-100
+}
+
+.delete-hover:hover .deleted-hover {
     @apply
         opacity-100
 }
