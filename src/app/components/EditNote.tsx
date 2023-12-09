@@ -1,28 +1,30 @@
 'use client'
 
 import { Menu } from "@/app/components";
-import { useMemo, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import dynamic from 'next/dynamic'
-
-import 'react-quill/dist/quill.snow.css'
+const CustomQuill = dynamic(() => import('@/app/components/CustomQuill'), { ssr: false })
 
 export function EditNote({ id }: { id: String }) {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
-    const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }), [])
-
-    const modules = {
-        toolbar: [
-            ['bold', 'italic', 'underline'],
-            [{'list': 'ordered'}, {'list': 'bullet'}, {'list': 'check'}],
-        ],
-    }
+    const quillRef: any = useRef(null);
     
+    const handleRef = useCallback((ref: any) => {
+        if (ref) {
+            const quill = ref.getEditor();
+            if (quill) {
+                quill.root.setAttribute('spellcheck', false);
+                quillRef.current = ref;
+            }
+        }
+    }, []);
+
     return (
         <div className="blur-effect notes blur-bg">
             <Menu />
-            <div className="h-[70%] sm:h-[86%] overflow-y-auto mt-[30px] sm:mt-[20px] w-auto">
+            <div className="h-[70%] sm:h-[84%] sm:mb-[20px] overflow-y-auto mt-[30px] sm:mt-[20px] w-auto">
                 <div className="flex grow">
                     <input 
                         type="text" 
@@ -34,14 +36,10 @@ export function EditNote({ id }: { id: String }) {
                         autoComplete="off"
                     />
                 </div>
-                <ReactQuill
-                    id="quill"
-                    theme="snow"
-                    value={body} 
-                    onChange={setBody}
-                    modules={modules}
-                    placeholder="Body"
-                    className="edit-note-quill"
+                <CustomQuill
+                    quillRef={handleRef}
+                    body={body}
+                    setBody={setBody}
                 />                
             </div>
             <div className="flex flex-1 flex-col justify-end sm:justify-start items-center sm:items-end text-gray-400 text-[14px]">

@@ -33,6 +33,7 @@ export function Note({ category }: { category: String }) {
         <div className="note blur-effect blur-dark-bg">
             <div className="mx-[20px] flex-grow">
                 <ReactQuill
+                    readOnly
                     id="quill"
                     theme="snow"
                     value={body} 
