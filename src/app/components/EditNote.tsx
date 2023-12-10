@@ -3,11 +3,16 @@
 import { Menu } from "@/app/components";
 import { useCallback, useRef, useState } from "react";
 import dynamic from 'next/dynamic'
+import { useSelector } from "react-redux";
 const CustomQuill = dynamic(() => import('@/app/components/CustomQuill'), { ssr: false })
 
 export function EditNote({ id }: { id: String }) {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+
+    const { spellchecked } = useSelector((state: any) => state.spellchecked)
+
+    // TODO: go to body when pressed enter on title input
 
     const quillRef: any = useRef(null);
     
@@ -15,7 +20,7 @@ export function EditNote({ id }: { id: String }) {
         if (ref) {
             const quill = ref.getEditor();
             if (quill) {
-                quill.root.setAttribute('spellcheck', false);
+                quill.root.setAttribute('spellcheck', spellchecked);
                 quillRef.current = ref;
             }
         }

@@ -1,4 +1,4 @@
-import { Menu } from "@/app/components";
+import {  Menu, Spellcheck, Wallpaper } from "@/app/components";
 
 export function Settings() {
     return (
@@ -7,6 +7,8 @@ export function Settings() {
             <div className="flex justify-between items-center h-[50px] mb-[20px] sm:mb-[10px]">
                 <h1 className="text-[24px]"> Settings </h1>
             </div>
+            <Spellcheck />
+            <Wallpaper />
         </div>
     )
 }
