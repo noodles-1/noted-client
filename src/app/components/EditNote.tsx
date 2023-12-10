@@ -3,28 +3,31 @@
 import { Menu } from "@/app/components";
 import { useCallback, useRef, useState } from "react";
 import dynamic from 'next/dynamic'
-import { useSelector } from "react-redux";
 const CustomQuill = dynamic(() => import('@/app/components/CustomQuill'), { ssr: false })
 
 export function EditNote({ id }: { id: String }) {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
 
-    const { spellchecked } = useSelector((state: any) => state.spellchecked)
-
-    // TODO: go to body when pressed enter on title input
-
-    const quillRef: any = useRef(null);
+    const quillRef = useRef<HTMLInputElement | null>(null)
+    const titleRef = useRef<HTMLInputElement | null>(null)
     
     const handleRef = useCallback((ref: any) => {
         if (ref) {
             const quill = ref.getEditor();
             if (quill) {
-                quill.root.setAttribute('spellcheck', spellchecked);
+                quill.root.setAttribute('spellcheck', false);
                 quillRef.current = ref;
             }
         }
     }, []);
+
+    const handleEnter = (e: any) => {
+        if (e.key === 'Enter' || e.key === 'Tab') {
+            e.preventDefault()
+            quillRef.current?.focus()
+        }
+    }
 
     return (
         <div className="blur-effect notes blur-bg">
@@ -32,6 +35,7 @@ export function EditNote({ id }: { id: String }) {
             <div className="h-[70%] sm:h-[84%] sm:mb-[20px] overflow-y-auto mt-[30px] sm:mt-[20px] w-auto">
                 <div className="flex grow">
                     <input 
+                        ref={titleRef}
                         type="text" 
                         id="note-title"
                         placeholder="Title" 
@@ -39,6 +43,7 @@ export function EditNote({ id }: { id: String }) {
                         value={title}
                         onChange={e => setTitle(e.target.value)}
                         autoComplete="off"
+                        onKeyDown={handleEnter}
                     />
                 </div>
                 <CustomQuill

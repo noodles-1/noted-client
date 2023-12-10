@@ -46,7 +46,6 @@
 }
 
 .note-hover {
-    transition: 100ms ease-in-out;
     box-shadow: inset 0 0 60px rgb(0 0 0 / 40%);
     @apply
         h-full
@@ -59,6 +58,7 @@
         rounded-[12px]
         flex
         justify-end
+        cursor-pointer
 }
 
 .note-drop-show {
@@ -90,6 +90,32 @@
         sm:gap-y-[20px]
 }
 
+.wallpaper-grid {
+    @apply
+        grid
+        grid-cols-2
+        lg:grid-cols-3
+        gap-x-[6px]
+        gap-y-[6px]
+        sm:gap-x-[10px]
+        sm:gap-y-[12px]
+        py-[6px]
+}
+
+.wallpaper-grid img {
+    height: 80px;
+    width: 140px;
+    min-height: 80px;
+    min-width: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.wallpaper-grid img:hover {
+    box-shadow: 0 0 15px rgb(0 0 0 / 60%);
+}
+
 .dropdown {
     box-shadow: 0 0 15px rgb(0 0 0 / 60%);
     @apply
@@ -105,7 +131,8 @@
         flex-col
 }
 
-.dropdown div {
+.dropdown .main-hover,
+.dropdown .delete-hover {
     @apply
         flex
         items-center
@@ -116,7 +143,8 @@
     padding: 4px 0;
 }
 
-.dropdown img {
+.dropdown .main-hover img,
+.dropdown .delete-hover img {
     transition: 60ms ease-in-out;
     @apply
         h-[24px]

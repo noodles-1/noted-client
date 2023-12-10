@@ -16,11 +16,7 @@ export const metadata: Metadata = {
   description: 'Client side for noted',
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <ClerkProvider
             appearance={{

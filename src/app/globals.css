@@ -9,7 +9,8 @@
     --clerk-link: rgba(82, 151, 236, 0.7);
     
     background-repeat: no-repeat;
-    background-image: url('/background.jpg');
+    background-size: cover;
+    background-image: url('/background4.jpg');
     @apply
         text-gray-100
 }
