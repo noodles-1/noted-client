@@ -33,6 +33,33 @@
         sm:translate-x-0
 }
 
+.home a {
+    @apply
+        flex
+        mb-[14px]
+        cursor-default
+        rounded-[10px]
+        items-center
+        py-[10px]
+        sm:py-[6px]
+        text-[18px]
+        sm:text-[14px]
+}
+
+.home a img {
+    @apply
+        h-[20px]
+        w-[20px]
+        sm:h-[16px]
+        sm:w-[16px]
+        mx-[12px]
+        sm:mx-[8px]
+}
+
+.home a:hover {
+    box-shadow: inset 0 0 20px rgb(0 0 0 / 80%);
+}
+
 .home-show {
     @apply
         translate-x-0

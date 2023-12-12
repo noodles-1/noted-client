@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 baseTheme: dark
             }}
         >
-            <html lang="en">
+            <html lang="en" className="sm:bg-[url('/background3.jpg')]">
                 <body className={inter.className}>
                     <StoreProvider>
                         <div>

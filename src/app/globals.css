@@ -10,7 +10,7 @@
     
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('/background4.jpg');
+    background-image: url('/background-phone.jpg');
     @apply
         text-gray-100
 }
