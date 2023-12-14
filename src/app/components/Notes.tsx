@@ -19,7 +19,7 @@ export function Notes({ category }: { category: String }) {
                     <NotesList category={category} />
                 </Suspense>
             </div>
-            <AddNote />
+            {category !== 'deleted' && <AddNote />}
         </div>
     )
 }

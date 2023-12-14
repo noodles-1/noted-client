@@ -1,9 +1,9 @@
-import { EditNote } from "@/app/components";
+import { Edit } from "@/app/components";
 
 // TODO: create static params
 
-export default function EditNotePage({ params }: { params: { id: String }}) {
+export default function EditNotePage({ params }: { params: { id: string }}) {
     return (
-        <EditNote id={params.id} />
+        <Edit id={params.id} />
     )
 }

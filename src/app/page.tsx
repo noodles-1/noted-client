@@ -1,11 +1,8 @@
 import { EmptyNotes, Navbar } from "@/app/components";
-import { auth } from "@clerk/nextjs";
-import { createUser } from "@/app/actions/createUser";
+import { createUser } from "@/app/actions";
 
-export default async function Page() {
-    const { userId } = auth()
-    
-    await createUser(userId ?? '')
+export default function Page() {
+    createUser()
 
     return (
         <div className="flex items-center justify-center h-screen">

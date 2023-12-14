@@ -1,13 +1,44 @@
 'use client'
 
 import { Menu } from "@/app/components";
-import { useCallback, useRef, useState } from "react";
+import { Note } from "@/app/interfaces";
+import { useUser } from "@clerk/nextjs";
+import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from 'next/dynamic'
 const CustomQuill = dynamic(() => import('@/app/components/CustomQuill'), { ssr: false })
 
-export function EditNote({ id }: { id: String }) {
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
+export function EditNote({ id, note }: { id: string, note: Note }) {
+    const [title, setTitle] = useState(note.title)
+    const [body, setBody] = useState(note.body)
+
+    const { user } = useUser()
+
+    const createdDate = new Date(note.created)
+    const createdFormat = `${createdDate.getMonth()}/${createdDate.getDate()}/${createdDate.getFullYear()}`
+    const modifiedDate = new Date(note.modified)
+    const modifiedFormat = `${modifiedDate.getMonth()}/${modifiedDate.getDate()}/${modifiedDate.getFullYear()}`
+
+    useEffect(() => {
+        const updatedNote: Note = {
+            userId: user?.id ?? '',
+            noteId: id,
+            title: title,
+            body: body,
+            category: note.category,
+            created: note.created,
+            modified: note.modified
+        }
+
+        async function updateNote() {
+            await fetch('/api/update-note', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatedNote)
+            })
+        }
+
+        updateNote()
+    }, [title, body])
 
     const quillRef = useRef<HTMLInputElement | null>(null)
     const titleRef = useRef<HTMLInputElement | null>(null)
@@ -22,7 +53,7 @@ export function EditNote({ id }: { id: String }) {
         }
     }, []);
 
-    const handleEnter = (e: any) => {
+    const handleKeyDown = async (e: any) => {
         if (e.key === 'Enter' || e.key === 'Tab') {
             e.preventDefault()
             quillRef.current?.focus()
@@ -43,7 +74,7 @@ export function EditNote({ id }: { id: String }) {
                         value={title}
                         onChange={e => setTitle(e.target.value)}
                         autoComplete="off"
-                        onKeyDown={handleEnter}
+                        onKeyDown={handleKeyDown}
                     />
                 </div>
                 <CustomQuill
@@ -53,8 +84,8 @@ export function EditNote({ id }: { id: String }) {
                 />                
             </div>
             <div className="flex flex-1 flex-col justify-end sm:justify-start items-center sm:items-end text-gray-400 text-[14px]">
-                <span> Created on 12/7/23 </span>
-                <span> Modified on 12/7/23 </span>
+                <span> Created on {createdFormat} </span>
+                <span> Modified on {modifiedFormat} </span>
             </div>
         </div>
     )
