@@ -161,8 +161,6 @@
 .dropdown .main-hover,
 .dropdown .delete-hover {
     @apply
-        flex
-        items-center
         py-[6px]
 }
 

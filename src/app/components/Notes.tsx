@@ -1,6 +1,5 @@
 import { Suspense } from "react"
 import { AddNote, EmptyTrash, Menu, NotesList } from "@/app/components"
-import Loading from "@/app/loading"
 
 export function Notes({ category }: { category: String }) {
     const categoryName = category.charAt(0).toUpperCase() + category.slice(1)
@@ -15,7 +14,7 @@ export function Notes({ category }: { category: String }) {
                         <EmptyTrash />
                     }
                 </div>
-                <Suspense fallback={<Loading />}>
+                <Suspense fallback={<h1 className="text-center"> Loading... </h1>}>
                     <NotesList category={category} />
                 </Suspense>
             </div>

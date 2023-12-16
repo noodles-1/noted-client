@@ -1,4 +1,4 @@
-export interface Note {
+export interface NoteType {
     userId: string,
     noteId: string,
     title: string,

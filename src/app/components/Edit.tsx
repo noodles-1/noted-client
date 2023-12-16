@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react"
 import { EditNote } from "@/app/components"
-import { Note } from "@/app/interfaces"
+import { NoteType } from "@/app/interfaces"
 
 export function Edit({ id }: { id: string }) {
-    const [note, setNote] = useState<Note>()
+    const [note, setNote] = useState<NoteType>()
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/note/${id}`)
+        fetch(`http://localhost:4000/api/note/${id}`)
             .then(res => res.json())
-            .then((data: Note) => {
+            .then((data: NoteType) => {
                 setNote(data)
             })
     }, [id])

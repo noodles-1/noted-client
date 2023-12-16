@@ -1,13 +1,13 @@
 'use client'
 
 import { Menu } from "@/app/components";
-import { Note } from "@/app/interfaces";
+import { NoteType } from "@/app/interfaces";
 import { useUser } from "@clerk/nextjs";
 import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from 'next/dynamic'
 const CustomQuill = dynamic(() => import('@/app/components/CustomQuill'), { ssr: false })
 
-export function EditNote({ id, note }: { id: string, note: Note }) {
+export function EditNote({ id, note }: { id: string, note: NoteType }) {
     const [title, setTitle] = useState(note.title)
     const [body, setBody] = useState(note.body)
 
@@ -19,21 +19,20 @@ export function EditNote({ id, note }: { id: string, note: Note }) {
     const modifiedFormat = `${modifiedDate.getMonth()}/${modifiedDate.getDate()}/${modifiedDate.getFullYear()}`
 
     useEffect(() => {
-        const updatedNote: Note = {
-            userId: user?.id ?? '',
+        const updatedNote = {
             noteId: id,
             title: title,
             body: body,
             category: note.category,
-            created: note.created,
             modified: note.modified
         }
 
         async function updateNote() {
-            await fetch('/api/update-note', {
+            await fetch('http://localhost:4000/api/update-note', {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedNote)
+                body: JSON.stringify(updatedNote),
+                cache: 'no-cache'
             })
         }
 

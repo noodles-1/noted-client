@@ -1,12 +1,14 @@
 'use client'
 
+import { useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
 
 export function AddNote () {
     const router = useRouter()
+    const { user } = useUser()
 
     const handleAddNote = async () => {
-        const res = await fetch(`/api/create-note`, {
+        const res = await fetch(`http://localhost:4000/api/create-note/${user?.id}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" }
         })

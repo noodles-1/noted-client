@@ -1,8 +1,14 @@
 import { EmptyNotes, Navbar } from "@/app/components";
-import { createUser } from "@/app/actions";
+import { auth } from "@clerk/nextjs";
 
 export default function Page() {
-    createUser()
+    const { userId } = auth()
+
+    fetch('http://localhost:4000/api/create-user', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: userId ?? '' })
+    })
 
     return (
         <div className="flex items-center justify-center h-screen">
