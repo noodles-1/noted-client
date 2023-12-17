@@ -85,7 +85,6 @@
         rounded-[12px]
         flex
         justify-end
-        cursor-pointer
 }
 
 .note-drop-show {
@@ -249,12 +248,6 @@
         w-0
 }
 
-.note-quill .quill-editor {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .quill > .ql-container > .ql-editor.ql-blank::before{
     font-style: normal;
     @apply
@@ -283,9 +276,9 @@
 
 .note-quill .ql-editor {
     font-family: 'Inter', sans-serif;
-    height: 220px;
+    height: 170px;
     color: white !important;
-    padding: 14px 0 !important;
+    padding: 10px 0 !important;
     overflow: hidden !important;
     @apply
         text-[16px]

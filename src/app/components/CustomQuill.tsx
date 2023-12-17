@@ -4,7 +4,15 @@ import ReactQuill from 'react-quill'
 
 import 'react-quill/dist/quill.snow.css'
 
-export default function CustomQuill({ quillRef, body, setBody }: { quillRef: any, body: any, setBody: any }) {
+export default function CustomQuill({ 
+    quillRef, 
+    body,
+    handleBodyChange
+}: { 
+    quillRef: any, 
+    body: any, 
+    handleBodyChange: any
+}) {
     const modules = {
         toolbar: [
             ['bold', 'italic', 'underline'],
@@ -17,7 +25,7 @@ export default function CustomQuill({ quillRef, body, setBody }: { quillRef: any
             ref={quillRef}
             id="quill"
             value={body}
-            onChange={setBody}
+            onChange={handleBodyChange}
             theme="snow"
             modules={modules}
             placeholder="Body"

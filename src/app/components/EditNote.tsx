@@ -2,42 +2,33 @@
 
 import { Menu } from "@/app/components";
 import { NoteType } from "@/app/interfaces";
-import { useUser } from "@clerk/nextjs";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import dynamic from 'next/dynamic'
+import { QueryClient, useMutation } from "@tanstack/react-query";
 const CustomQuill = dynamic(() => import('@/app/components/CustomQuill'), { ssr: false })
 
-export function EditNote({ id, note }: { id: string, note: NoteType }) {
+async function updateNote(updatedNote: any) {
+    await fetch('http://localhost:4000/api/update-note', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedNote)
+    })
+}
+
+export function EditNote({ note }: { note: NoteType }) {
     const [title, setTitle] = useState(note.title)
     const [body, setBody] = useState(note.body)
 
-    const { user } = useUser()
+    const queryClient = new QueryClient()
+    const { mutateAsync } = useMutation({
+        mutationFn: updateNote,
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['all-notes'] })
+    })
 
     const createdDate = new Date(note.created)
     const createdFormat = `${createdDate.getMonth()}/${createdDate.getDate()}/${createdDate.getFullYear()}`
     const modifiedDate = new Date(note.modified)
     const modifiedFormat = `${modifiedDate.getMonth()}/${modifiedDate.getDate()}/${modifiedDate.getFullYear()}`
-
-    useEffect(() => {
-        const updatedNote = {
-            noteId: id,
-            title: title,
-            body: body,
-            category: note.category,
-            modified: note.modified
-        }
-
-        async function updateNote() {
-            await fetch('http://localhost:4000/api/update-note', {
-                method: 'POST',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(updatedNote),
-                cache: 'no-cache'
-            })
-        }
-
-        updateNote()
-    }, [title, body])
 
     const quillRef = useRef<HTMLInputElement | null>(null)
     const titleRef = useRef<HTMLInputElement | null>(null)
@@ -52,11 +43,45 @@ export function EditNote({ id, note }: { id: string, note: NoteType }) {
         }
     }, []);
 
-    const handleKeyDown = async (e: any) => {
+    const handleTitleKeyDown = (e: any) => {
         if (e.key === 'Enter' || e.key === 'Tab') {
             e.preventDefault()
             quillRef.current?.focus()
         }
+    }
+
+    const handleTitleChange = (e: any) => {
+        const updatedNote = {
+            noteId: note.noteId,
+            title: e.target.value,
+            body: body,
+            category: note.category,
+            modified: new Date()
+        }
+        
+        async function update() {
+            await mutateAsync(updatedNote)
+        }
+
+        update()
+        setTitle(e.target.value)
+    }
+
+    const handleBodyChange = (e: string) => {
+        const updatedNote = {
+            noteId: note.noteId,
+            title: title,
+            body: e,
+            category: note.category,
+            modified: new Date()
+        }
+
+        async function update() {
+            await mutateAsync(updatedNote)
+        }
+
+        update()
+        setBody(e)
     }
 
     return (
@@ -71,15 +96,15 @@ export function EditNote({ id, note }: { id: string, note: NoteType }) {
                         placeholder="Title" 
                         spellCheck={false} 
                         value={title}
-                        onChange={e => setTitle(e.target.value)}
+                        onChange={handleTitleChange}
                         autoComplete="off"
-                        onKeyDown={handleKeyDown}
+                        onKeyDown={handleTitleKeyDown}
                     />
                 </div>
                 <CustomQuill
                     quillRef={handleRef}
                     body={body}
-                    setBody={setBody}
+                    handleBodyChange={handleBodyChange}
                 />                
             </div>
             <div className="flex flex-1 flex-col justify-end sm:justify-start items-center sm:items-end text-gray-400 text-[14px]">

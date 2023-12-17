@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
-// Redux
+// Providers
 import StoreProvider from '@/StoreProvider'
+import QueryProvider from '@/QueryProvider'
 
 // Clerk auth
 import { ClerkProvider } from '@clerk/nextjs'
@@ -26,9 +27,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <html lang="en" className="sm:bg-[url('/background3.jpg')]">
                 <body className={inter.className}>
                     <StoreProvider>
-                        <div>
-                            {children}
-                        </div>
+                        <QueryProvider>
+                            <div>
+                                {children}
+                            </div>
+                        </QueryProvider>
                     </StoreProvider>
                 </body>
             </html>

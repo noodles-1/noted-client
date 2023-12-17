@@ -1,7 +1,7 @@
-import { Suspense } from "react"
-import { AddNote, EmptyTrash, Menu, NotesList } from "@/app/components"
+import { AddNote, EmptyTrash, Menu } from "@/app/components"
+import { NotesList } from "./NotesList"
 
-export function Notes({ category }: { category: String }) {
+export function Notes({ category }: { category: string }) {
     const categoryName = category.charAt(0).toUpperCase() + category.slice(1)
 
     return (
@@ -14,9 +14,7 @@ export function Notes({ category }: { category: String }) {
                         <EmptyTrash />
                     }
                 </div>
-                <Suspense fallback={<h1 className="text-center"> Loading... </h1>}>
-                    <NotesList category={category} />
-                </Suspense>
+                <NotesList category={category} />
             </div>
             {category !== 'deleted' && <AddNote />}
         </div>
