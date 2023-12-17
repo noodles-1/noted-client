@@ -14,13 +14,10 @@ async function getNotes(userId: string, category: string) {
 export function NotesList({ category }: { category: string }) {
     const { user } = useUser()
 
-    if (!user)
-        return <h1> Loading... </h1>
-
-    const { data: notes, isFetchedAfterMount } = useQuery<NoteType[]>({
+    const { data: notes, isFetchedAfterMount } = user ? useQuery<NoteType[]>({
         queryFn: () => getNotes(user.id, category),
         queryKey: ['all-notes']
-    })
+    }) : { data: null, isFetchedAfterMount: false }
 
     return (
         <div className="note-list-grid">

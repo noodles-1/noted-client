@@ -26,7 +26,9 @@
 }
 
 .cl-signIn-start,
-.cl-signUp-start {
+.cl-signUp-start,
+.cl-signUp-emailCode,
+.cl-signIn-emailCode {
     position: absolute;
     z-index: 50;
     transform: translate(-50%, -50%);
@@ -34,7 +36,11 @@
     left: 50%;
 }
 
-.cl-card a {
+.cl-card a,
+.cl-formResendCodeLink,
+.cl-identityPreviewEditButton,
+.cl-badge,
+.cl-internal-9ci4h9 {
     color: var(--clerk-link);
 }
 
