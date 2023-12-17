@@ -9,12 +9,59 @@ import Link from 'next/link'
 
 import 'react-quill/dist/quill.snow.css'
 
-async function updateNote(updatedNote: any) {
+async function pinNote(note: any) {
+    const updatedNote = {
+        noteId: note.noteId,
+        title: note.title,
+        body: note.body,
+        category: 'pinned',
+        modified: note.modified
+    }
+
     await fetch('http://localhost:4000/api/update-note', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedNote),
-        cache: 'no-store'
+        body: JSON.stringify(updatedNote)
+    })
+}
+
+async function unpinNote(note: any) {
+    const updatedNote = {
+        noteId: note.noteId,
+        title: note.title,
+        body: note.body,
+        category: 'all',
+        modified: note.modified
+    }
+
+    await fetch('http://localhost:4000/api/update-note', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedNote)
+    })
+}
+
+async function deleteNote(note: any) {
+    const updatedNote = {
+        noteId: note.noteId,
+        title: note.title,
+        body: note.body,
+        category: 'deleted',
+        modified: note.modified
+    }
+
+    await fetch('http://localhost:4000/api/update-note', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedNote)
+    })
+}
+
+async function deleteNoteForever(noteId: string) {
+    await fetch('http://localhost:4000/api/delete-note', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ noteId: noteId })
     })
 }
 
@@ -22,8 +69,24 @@ export function Note({ note }: { note: NoteType }) {
     const [dropShown, setDropShown] = useState(false)
 
     const queryClient = useQueryClient()
-    const { mutateAsync } = useMutation({
-        mutationFn: updateNote,
+
+    const { mutateAsync: mutatePinNote, isPending: pinPending } = useMutation({
+        mutationFn: pinNote,
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['all-notes'] })
+    })
+
+    const { mutateAsync: mutateUnpinNote, isPending: unpinPending } = useMutation({
+        mutationFn: unpinNote,
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['all-notes'] })
+    })
+
+    const { mutateAsync: mutateDeleteNote, isPending: deletePending } = useMutation({
+        mutationFn: deleteNote,
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['all-notes'] })
+    })
+
+    const { mutateAsync: mutateDeleteNoteForever, isPending: deleteForeverPending } = useMutation({
+        mutationFn: deleteNoteForever,
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['all-notes'] })
     })
 
@@ -40,29 +103,21 @@ export function Note({ note }: { note: NoteType }) {
         e.preventDefault()
         setDropShown(true)
     }
-
-    const updatedNote = {
-        noteId: note.noteId,
-        title: note.title,
-        body: note.body,
-        category: '',
-        modified: note.modified
-    }
     
     const handleUnpin = async () => {
-        updatedNote.category = 'all'
-        await mutateAsync(updatedNote)
+        await mutateUnpinNote(note)
     }
     
     const handlePin = async () => {
-        updatedNote.category = 'pinned'
-        await mutateAsync(updatedNote)
+        await mutatePinNote(note)
     }
     
-    
     const handleDelete = async () => {
-        updatedNote.category = 'deleted'
-        await mutateAsync(updatedNote)
+        await mutateDeleteNote(note)
+    }
+
+    const handleDeleteForever = async () => {
+        await mutateDeleteNoteForever(note.noteId)
     }
 
     return (
@@ -96,7 +151,7 @@ export function Note({ note }: { note: NoteType }) {
                                     }}>
                                         <img src="/unpinned.png" alt="unpinned" className="pinned-hover" />
                                         <img src="/pinned.png" alt="unpinned" className="unpinned-hover absolute opacity-100" />
-                                        <h1> Pinned </h1>
+                                        <h1> {unpinPending ? 'Unpinning' : 'Pinned'} </h1>
                                     </div>
                                 )}
                                 {note.category === 'all' && (
@@ -106,7 +161,7 @@ export function Note({ note }: { note: NoteType }) {
                                     }}>
                                         <img src="/unpinned.png" alt="unpinned" className="unpinned-hover" />
                                         <img src="/pinned.png" alt="unpinned" className="pinned-hover absolute opacity-0" />
-                                        <h1> Pin </h1>
+                                        <h1> {pinPending ? 'Pinning' : 'Pin'} </h1>
                                     </div>
                                 )}
                             </div>
@@ -116,7 +171,7 @@ export function Note({ note }: { note: NoteType }) {
                             }}>
                                 <img src="/delete.png" alt="delete" />
                                 <img src="/delete-fill.png" alt="delete-fill" className="deleted-hover absolute opacity-0" />
-                                <h1> Delete </h1>
+                                <h1> {deletePending ? 'Deleting' : 'Delete'} </h1>
                             </div>
                         </Dropdown>
                     }
@@ -138,16 +193,16 @@ export function Note({ note }: { note: NoteType }) {
                                 }}>
                                     <img src="/restore.png" alt="restore" />
                                     <img src="/restore-fill.png" alt="restore-fill" className="restore-hover absolute opacity-0" />
-                                    <h1> Restore </h1>
+                                    <h1> {unpinPending ? 'Restoring' : 'Restore'} </h1>
                                 </div>
                             </div>
                             <div className="delete-hover border-b-[1px] border-b-gray-600 flex items-center cursor-pointer" onClick={async (e) => {
                                 e.preventDefault()
-                                console.log('permanently delete this note')
+                                await handleDeleteForever()
                             }}>
                                 <img src="/delete.png" alt="delete" />
                                 <img src="/delete-fill.png" alt="delete-fill" className="deleted-hover absolute opacity-0" />
-                                <h1> Delete </h1>
+                                <h1> {deleteForeverPending ? 'Deleting' : 'Delete'} </h1>
                             </div>
                         </Dropdown>
                     }
