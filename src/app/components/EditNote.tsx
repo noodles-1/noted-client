@@ -1,10 +1,11 @@
 'use client'
 
 import { Menu } from "@/app/components";
+import { getUser } from "@/app/fetch";
 import { NoteType } from "@/app/interfaces";
 import { useCallback, useRef, useState } from "react";
 import dynamic from 'next/dynamic'
-import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 const CustomQuill = dynamic(() => import('@/app/components/CustomQuill'), { ssr: false })
 
 async function updateNote(updatedNote: any) {
@@ -19,7 +20,13 @@ export function EditNote({ note }: { note: NoteType }) {
     const [title, setTitle] = useState(note.title)
     const [body, setBody] = useState(note.body)
 
-    const queryClient = new QueryClient()
+    const { data } = useQuery({
+        queryFn: () => getUser(note.userId),
+        queryKey: ['user']
+    })
+
+    const queryClient = useQueryClient()
+
     const { mutateAsync } = useMutation({
         mutationFn: updateNote,
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['all-notes'] })
@@ -34,10 +41,10 @@ export function EditNote({ note }: { note: NoteType }) {
     const titleRef = useRef<HTMLInputElement | null>(null)
     
     const handleRef = useCallback((ref: any) => {
-        if (ref) {
+        if (ref && data) {
             const quill = ref.getEditor();
             if (quill) {
-                quill.root.setAttribute('spellcheck', false);
+                quill.root.setAttribute('spellcheck', data.spellchecked);
                 quillRef.current = ref;
             }
         }

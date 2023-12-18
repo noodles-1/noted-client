@@ -8,7 +8,7 @@
     --light-background: rgba(155, 155, 155, 0.7);
     --clerk-link: rgba(82, 151, 236, 0.7);
     
-    background-image: url('/background-phone.jpg');
+    background-image: url('/background3.jpg');
     @apply
         text-gray-100
 }
@@ -28,7 +28,12 @@
 .cl-signIn-start,
 .cl-signUp-start,
 .cl-signUp-emailCode,
-.cl-signIn-emailCode {
+.cl-signIn-emailCode,
+.cl-signIn-password,
+.cl-signIn-alternativeMethods,
+.cl-signIn-havingTrouble,
+.cl-signIn-forgotPasswordMethods,
+.cl-signIn-resetPassword {
     position: absolute;
     z-index: 50;
     transform: translate(-50%, -50%);
@@ -96,4 +101,17 @@
 
 .blur-light-bg {
     background-color: var(--light-background); 
+}
+
+/* Wallpaper */
+.wallpaper {
+    @apply
+        absolute
+        h-screen
+        w-screen
+        object-cover
+}
+
+input[type="file"] {
+    display: none;
 }

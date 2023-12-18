@@ -2,8 +2,8 @@
 
 import { Note } from "@/app/components";
 import { NoteType } from "@/app/interfaces";
-import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
+import Cookies from "universal-cookie"
 
 async function getNotes(userId: string, category: string) {
     const res = await fetch(`http://localhost:4000/api/all-notes/${userId}/${category}`)
@@ -12,12 +12,15 @@ async function getNotes(userId: string, category: string) {
 }
 
 export function NotesList({ category }: { category: string }) {
-    const { user } = useUser()
+    const cookies = new Cookies()
+    const userId = cookies.get('userId')
+    
+    // TODO: learn symbol property and get each entity ID as key
 
-    const { data: notes, isFetchedAfterMount } = user ? useQuery<NoteType[]>({
-        queryFn: () => getNotes(user.id, category),
+    const { data: notes, isFetchedAfterMount } = useQuery<NoteType[]>({
+        queryFn: () => getNotes(userId, category),
         queryKey: ['all-notes']
-    }) : { data: null, isFetchedAfterMount: false }
+    })
 
     return (
         <div className="note-list-grid">

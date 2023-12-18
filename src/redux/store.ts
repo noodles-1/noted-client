@@ -3,6 +3,6 @@ import shown from "@/redux/slices/shown";
 
 export const store = configureStore({
     reducer: {
-        shown: shown
+        shown: shown,
     }
 })

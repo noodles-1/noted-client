@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@tanstack/react-query": "^5.14.0",
     "@tanstack/react-query-next-experimental": "^5.14.0",
+    "aws-sdk": "^2.1499.0",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
@@ -25,7 +26,8 @@
     "redis": "^4.6.11",
     "redis-om": "^0.4.3",
     "styled-components": "^6.1.1",
-    "uniqid": "^5.4.0"
+    "uniqid": "^5.4.0",
+    "universal-cookie": "^6.1.1"
   },
   "devDependencies": {
     "@types/node": "^20",

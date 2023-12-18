@@ -1,21 +1,25 @@
-import { EmptyNotes, Navbar } from "@/app/components";
-import { auth } from "@clerk/nextjs";
+'use client'
 
-export default function Page() {
-    const { userId } = auth()
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import Cookies from 'universal-cookie'
 
-    fetch('http://localhost:4000/api/create-user', {
+async function createUser(userId: string) {
+    await fetch('http://localhost:4000/api/create-user', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId: userId ?? '' })
+        body: JSON.stringify({ userId: userId })
     })
+}
 
-    return (
-        <div className="flex items-center justify-center h-screen">
-            <div className="wrapper">
-                <Navbar />
-                <EmptyNotes />
-            </div>
-        </div>
-    )
+export default async function Page() {
+    const { user } = useUser()
+    const router = useRouter()
+    const cookies = new Cookies({ path: '/' })
+
+    if (user) {
+        await createUser(user.id)
+        cookies.set('userId', user.id)
+        router.push('/home')
+    }
 }
