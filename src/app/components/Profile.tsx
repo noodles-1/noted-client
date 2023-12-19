@@ -8,7 +8,7 @@ export function Profile() {
         <>
             {user && isLoaded &&
                 <div className="flex items-center mb-[30px]">
-                    <UserButton afterSignOutUrl="/sign-in" />
+                    <UserButton afterSignOutUrl="/logout" />
                 </div>
             }
         </>

@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Dropdown } from "@/app/components"
 import { getUser, updateUser } from "@/app/fetch"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useRouter } from "next/navigation"
 import Cookies from "universal-cookie"
 
 // AWS S3
@@ -16,7 +15,6 @@ export function Wallpaper() {
     const userId = cookies.get('userId')
 
     const [dropShown, setDropShown] = useState(false)
-    const router = useRouter()
 
     const { data } = useQuery({
         queryFn: () => getUser(userId),
@@ -32,7 +30,6 @@ export function Wallpaper() {
 
     const handleWallpaper = async (wallpaper: string) => {
         await mutateAsync({ userId: data.userId, spellchecked: data.spellchecked, wallpaper: wallpaper })
-        router.refresh()
     }
 
     const handleImgInput = (e: any) => {

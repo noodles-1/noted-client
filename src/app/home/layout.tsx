@@ -1,5 +1,8 @@
+'use client'
+
 import { Navbar } from "@/app/components";
-import { auth } from "@clerk/nextjs";
+import { useQuery } from "@tanstack/react-query";
+import Cookies from "universal-cookie"
 
 async function getUser(userId: string) {
     const res = await fetch(`http://localhost:4000/api/get-user/${userId}`)
@@ -7,10 +10,14 @@ async function getUser(userId: string) {
     return user
 }
 
-export default async function HomeLayout ({ children }: { children: React.ReactNode }) {
-    const { userId } = auth()
-
-    const user = await getUser(userId ?? '')
+export default function HomeLayout ({ children }: { children: React.ReactNode }) {
+    const cookies = new Cookies()
+    const userId = cookies.get('userId')
+    
+    const { data: user } = useQuery({
+        queryFn: () => getUser(userId),
+        queryKey: ['user']
+    })
 
     return (
         <div className="flex items-center justify-center h-screen">

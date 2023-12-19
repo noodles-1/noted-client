@@ -15,21 +15,39 @@ export function NotesList({ category }: { category: string }) {
     const cookies = new Cookies()
     const userId = cookies.get('userId')
     
-    // TODO: learn symbol property and get each entity ID as key
-
     const { data: notes, isFetchedAfterMount } = useQuery<NoteType[]>({
         queryFn: () => getNotes(userId, category),
         queryKey: ['all-notes']
     })
 
-    return (
-        <div className="note-list-grid">
-            {isFetchedAfterMount && notes?.map((note: NoteType) => (
-                <Note 
-                    key={note.noteId} 
-                    note={note}
-                />
-            ))}
-        </div>
+    return ( 
+        <>
+            {notes?.length == 0 && 
+                <div className="w-full h-[85%] flex justify-center items-center text-gray-300">
+                    {category === 'all' && (
+                        <h1 className="flex items-center"> 
+                            Click
+                            <img src="/add.png" alt="add" className="inline-block h-[12px] mx-[6px] opacity-70" />
+                            to add a new note
+                        </h1>
+                    )}
+                    {category === 'pinned' && (
+                        <h1 className="flex items-center"> 
+                            Press
+                            <img src="/home-pinned.png" alt="home-pinned" className="inline-block h-[14px] mx-[6px] opacity-70" />
+                            to pin a note
+                        </h1>
+                    )}
+                </div>
+            }
+            <div className="note-list-grid">
+                {isFetchedAfterMount && notes?.map((note: NoteType) => (
+                    <Note 
+                        key={note.noteId} 
+                        note={note}
+                    />
+                ))}
+            </div>
+        </>
     )
 }

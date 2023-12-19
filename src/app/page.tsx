@@ -15,7 +15,7 @@ async function createUser(userId: string) {
 export default async function Page() {
     const { user } = useUser()
     const router = useRouter()
-    const cookies = new Cookies({ path: '/' })
+    const cookies = new Cookies()
 
     if (user) {
         await createUser(user.id)

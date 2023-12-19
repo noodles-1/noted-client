@@ -13,8 +13,8 @@ import { dark } from '@clerk/themes'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Noted',
-  description: 'Client side for noted',
+    title: 'Noted',
+    description: 'Client side for noted',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -21,13 +21,17 @@ export function Spellcheck() {
         onSuccess: () => queryClient.invalidateQueries({ queryKey: ['user'] })
     })
 
+    const handleSpellcheck = async () => {
+        await mutateAsync({ userId: data.userId, spellchecked: !data.spellchecked, wallpaper: data.wallpaper })
+    }
+
     return (
         <div className="w-full flex items-center justify-between border-y-[1px] border-slate-600 py-[14px] sm:py-[10px]">
             <h1> Enable spellcheck </h1>
             {isFetchedAfterMount && data && 
                 <CustomSwitch
                     checked={data.spellchecked}
-                    onChange={async () => await mutateAsync({ userId: data.userId, spellchecked: !data.spellchecked, wallpaper: data.wallpaper })}
+                    onChange={async () => await handleSpellcheck()}
                 />
             }
         </div>
