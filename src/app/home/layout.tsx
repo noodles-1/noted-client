@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Cookies from "universal-cookie"
 
 async function getUser(userId: string) {
-    const res = await fetch(`http://localhost:4000/api/get-user/${userId}`)
+    const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/get-user/${userId}`)
     const user = await res.json()
     return user
 }

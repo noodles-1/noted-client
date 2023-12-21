@@ -9,7 +9,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 const CustomQuill = dynamic(() => import('@/app/components/CustomQuill'), { ssr: false })
 
 async function updateNote(updatedNote: any) {
-    await fetch('http://localhost:4000/api/update-note', {
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/update-note', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedNote)

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Cookies from 'universal-cookie'
 
 async function createUser(userId: string) {
-    await fetch('http://localhost:4000/api/create-user', {
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/create-user', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: userId })

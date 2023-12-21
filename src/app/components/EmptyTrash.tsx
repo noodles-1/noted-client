@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import Cookies from "universal-cookie"
 
 async function deleteNotes(userId: string) {
-    await fetch('http://localhost:4000/api/delete-notes', {
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/delete-notes', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId: userId })

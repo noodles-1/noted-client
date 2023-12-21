@@ -4,7 +4,7 @@ import { EditNote } from "@/app/components"
 import { useQuery } from "@tanstack/react-query"
 
 async function getNote(userId: string) {
-    const res = await fetch(`http://localhost:4000/api/note/${userId}`)
+    const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/note/${userId}`)
     const note = await res.json()
     return note
 }

@@ -3,7 +3,7 @@ import { NoteType } from "@/app/interfaces";
 import { auth } from "@clerk/nextjs";
 
 export async function generateStaticParams() {
-    const res = await fetch('http://localhost:4000/api/notes')
+    const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/notes')
     const notes: NoteType[] = await res.json()
     return notes.map((note: NoteType) => ({
         id: note.noteId
@@ -15,7 +15,7 @@ export default async function EditNotePage({ params }: { params: { id: string }}
 
     let note: NoteType | null = null
     if (userId) {
-        const res = await fetch(`http://localhost:4000/api/check-note/${userId}/${params.id}`)
+        const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/check-note/${userId}/${params.id}`)
         note = await res.json()
     }
 

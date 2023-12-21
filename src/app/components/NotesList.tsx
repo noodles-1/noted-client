@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Cookies from "universal-cookie"
 
 async function getNotes(userId: string, category: string) {
-    const res = await fetch(`http://localhost:4000/api/all-notes/${userId}/${category}`)
+    const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/all-notes/${userId}/${category}`)
     const notes: NoteType[] = await res.json()
     return notes
 }

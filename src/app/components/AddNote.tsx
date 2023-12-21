@@ -8,7 +8,7 @@ export function AddNote () {
     const { user } = useUser()
 
     const handleAddNote = async () => {
-        const res = await fetch(`http://localhost:4000/api/create-note/${user?.id}`, {
+        const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/create-note/${user?.id}`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" }
         })

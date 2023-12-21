@@ -18,7 +18,7 @@ async function pinNote(note: any) {
         modified: note.modified
     }
 
-    await fetch('http://localhost:4000/api/update-note', {
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/update-note', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedNote)
@@ -34,7 +34,7 @@ async function unpinNote(note: any) {
         modified: note.modified
     }
 
-    await fetch('http://localhost:4000/api/update-note', {
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/update-note', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedNote)
@@ -50,7 +50,7 @@ async function deleteNote(note: any) {
         modified: note.modified
     }
 
-    await fetch('http://localhost:4000/api/update-note', {
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/update-note', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedNote)
@@ -58,7 +58,7 @@ async function deleteNote(note: any) {
 }
 
 async function deleteNoteForever(noteId: string) {
-    await fetch('http://localhost:4000/api/delete-note', {
+    await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/delete-note', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ noteId: noteId })
