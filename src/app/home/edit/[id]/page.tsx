@@ -1,7 +1,10 @@
+'use client'
+
 import { Edit } from "@/app/components";
 import { NoteType } from "@/app/interfaces";
-import { auth } from "@clerk/nextjs";
+import Cookies from "universal-cookie";
 
+/*
 export async function generateStaticParams() {
     const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/notes')
     const notes: NoteType[] = await res.json()
@@ -9,9 +12,11 @@ export async function generateStaticParams() {
         id: note.noteId
     }))
 }
+*/
 
 export default async function EditNotePage({ params }: { params: { id: string }}) {
-    const { userId } = auth()
+    const cookies = new Cookies()
+    const userId = cookies.get('userId')
 
     let note: NoteType | null = null
     if (userId) {
