@@ -1,16 +1,18 @@
 'use client'
 
-import { useUser } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
+import Cookies from "universal-cookie"
 
 export function AddNote () {
     const router = useRouter()
-    const { user } = useUser()
+    const cookies = new Cookies()
+    const userId = cookies.get('userId')
 
     const handleAddNote = async () => {
-        const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/create-note/${user?.id}`, {
+        const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/create-note', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" }
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId: userId })
         })
         const data = await res.json()
         router.push(`/home/edit/${data.noteId}`)
