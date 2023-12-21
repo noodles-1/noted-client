@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noted-client
+  labels:
+    app: noted-client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: noted-client-deployment
+  template:
+    metadata:
+      labels:
+        app: noted-client-deployment
+    spec:
+      containers:
+      - name: noted-client-c
+        image: noted-client
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: "3Gi"
+            cpu: "800m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: noted-client-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: noted-client-deployment
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+    nodePort: 30111
