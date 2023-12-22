@@ -2,26 +2,17 @@
 
 import { Edit } from "@/app/components";
 import { NoteType } from "@/app/interfaces";
+import { use } from "react";
 import Cookies from "universal-cookie";
 
-/*
-export async function generateStaticParams() {
-    const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + '/api/notes')
-    const notes: NoteType[] = await res.json()
-    return notes.map((note: NoteType) => ({
-        id: note.noteId
-    }))
-}
-*/
-
-export default async function EditNotePage({ params }: { params: { id: string }}) {
+export default function EditNotePage({ params }: { params: { id: string }}) {
     const cookies = new Cookies()
     const userId = cookies.get('userId')
 
     let note: NoteType | null = null
     if (userId) {
-        const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/check-note/${userId}/${params.id}`)
-        note = await res.json()
+        const res = use(fetch(process.env.NEXT_PUBLIC_SERVER_URL + `/api/check-note/${userId}/${params.id}`))
+        note = use(res.json())
     }
 
     if (!note) {
@@ -29,7 +20,7 @@ export default async function EditNotePage({ params }: { params: { id: string }}
             <div className="notes blur-effect blur-bg flex items-center justify-center">
                 <div className="flex items-center">
                     <h1 className="text-[30px] pr-[20px] mr-[20px] border-r-[1px] border-gray-500"> 404 </h1>
-                    <h1> The note you're looking for cannot be found. </h1>
+                    <h1> The note you&apos;re looking for cannot be found. </h1>
                 </div>
             </div>
         )

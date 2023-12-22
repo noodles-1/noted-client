@@ -48,7 +48,7 @@ export function EditNote({ note }: { note: NoteType }) {
                 quillRef.current = ref;
             }
         }
-    }, []);
+    }, [data]);
 
     const handleTitleKeyDown = (e: any) => {
         if (e.key === 'Enter' || e.key === 'Tab') {

@@ -11,5 +11,5 @@ export default function LogoutPage() {
 
     useEffect(() => {
         router.push('/sign-in')
-    }, [])
+    }, [router])
 }
