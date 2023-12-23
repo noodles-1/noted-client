@@ -1,5 +1,6 @@
 'use client'
 
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import Cookies from "universal-cookie"
 
@@ -22,7 +23,7 @@ export function AddNote () {
         <div onClick={handleAddNote}>
             <div className="blur-effect add-note-btn">
                 <h1 className="mr-[16px] pr-[16px] border-r-[1px] border-r-gray-700 hidden sm:block"> Add note </h1>
-                <img src="/add.png" alt="add-note" />
+                <Image height={100} width={100} src="/add.png" alt="add-note" />
             </div>
         </div>
     )

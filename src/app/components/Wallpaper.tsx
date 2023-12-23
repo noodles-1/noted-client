@@ -9,6 +9,7 @@ import Cookies from "universal-cookie"
 // AWS S3
 import { S3 } from "aws-sdk"
 import { s3 } from "@/config/aws_s3"
+import Image from "next/image"
 
 export function Wallpaper() {
     const cookies = new Cookies()
@@ -56,7 +57,9 @@ export function Wallpaper() {
     for (let i = 1; i <= 5; i++) {
         const url = `background${i}`
         wallpapers.push(
-            <img 
+            <Image
+                height={80}
+                width={140} 
                 src={`/${url}.jpg`} 
                 alt={url} 
                 key={url}

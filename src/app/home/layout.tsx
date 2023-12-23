@@ -2,6 +2,7 @@
 
 import { Navbar } from "@/app/components";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Cookies from "universal-cookie"
 
 async function getUser(userId: string) {
@@ -22,7 +23,8 @@ export default function HomeLayout ({ children }: { children: React.ReactNode })
     return (
         <div className="flex items-center justify-center h-screen">
             {user && 
-                <img 
+                <Image
+                    layout="fill"
                     src={user.wallpaper} 
                     alt="wallpaper" 
                     className="wallpaper" 

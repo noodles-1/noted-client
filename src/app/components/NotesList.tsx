@@ -3,6 +3,7 @@
 import { Note } from "@/app/components";
 import { NoteType } from "@/app/interfaces";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Cookies from "universal-cookie"
 
 async function getNotes(userId: string, category: string) {
@@ -27,14 +28,14 @@ export function NotesList({ category }: { category: string }) {
                     {category === 'all' && (
                         <h1 className="flex items-center"> 
                             Click
-                            <img src="/add.png" alt="add" className="inline-block h-[12px] mx-[6px] opacity-70" />
+                            <Image height={12} width={12} src="/add.png" alt="add" className="inline-block h-[12px] mx-[6px] opacity-70" />
                             to add a new note
                         </h1>
                     )}
                     {category === 'pinned' && (
                         <h1 className="flex items-center"> 
                             Press
-                            <img src="/home-pinned.png" alt="home-pinned" className="inline-block h-[14px] mx-[6px] opacity-70" />
+                            <Image height={14} width={14} src="/home-pinned.png" alt="home-pinned" className="inline-block h-[14px] mx-[6px] opacity-70" />
                             to pin a note
                         </h1>
                     )}

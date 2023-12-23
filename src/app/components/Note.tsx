@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import 'react-quill/dist/quill.snow.css'
+import Image from 'next/image'
 
 async function pinNote(note: any) {
     const updatedNote = {
@@ -135,7 +136,9 @@ export function Note({ note }: { note: NoteType }) {
             </div>
             {note.category !== 'deleted' ?
                 <Link href={`/home/edit/${note.noteId}`} className={`note-hover ${dropShown ? 'note-drop-show' : ''}`}>
-                    <img 
+                    <Image
+                        height={30}
+                        width={30} 
                         src="/dropdown.png" 
                         alt="dropdown" 
                         className="h-[30px] my-[12px] mx-[12px] py-[6px] px-[6px] hover:opacity-70 rounded-full hover:bg-gray-700"
@@ -149,8 +152,8 @@ export function Note({ note }: { note: NoteType }) {
                                         e.preventDefault()
                                         await handleUnpin()
                                     }}>
-                                        <img src="/unpinned.png" alt="unpinned" className="pinned-hover" />
-                                        <img src="/pinned.png" alt="unpinned" className="unpinned-hover absolute opacity-100" />
+                                        <Image height={24} width={30} src="/unpinned.png" alt="unpinned" className="pinned-hover" />
+                                        <Image height={24} width={30} src="/pinned.png" alt="unpinned" className="unpinned-hover absolute opacity-100" />
                                         <h1> {unpinPending ? 'Unpinning' : 'Pinned'} </h1>
                                     </div>
                                 )}
@@ -159,8 +162,8 @@ export function Note({ note }: { note: NoteType }) {
                                         e.preventDefault()
                                         await handlePin()
                                     }}>
-                                        <img src="/unpinned.png" alt="unpinned" className="unpinned-hover" />
-                                        <img src="/pinned.png" alt="unpinned" className="pinned-hover absolute opacity-0" />
+                                        <Image height={24} width={30} src="/unpinned.png" alt="unpinned" className="unpinned-hover" />
+                                        <Image height={24} width={30} src="/pinned.png" alt="unpinned" className="pinned-hover absolute opacity-0" />
                                         <h1> {pinPending ? 'Pinning' : 'Pin'} </h1>
                                     </div>
                                 )}
@@ -169,8 +172,8 @@ export function Note({ note }: { note: NoteType }) {
                                 e.preventDefault()
                                 await handleDelete()
                             }}>
-                                <img src="/delete.png" alt="delete" />
-                                <img src="/delete-fill.png" alt="delete-fill" className="deleted-hover absolute opacity-0" />
+                                <Image height={24} width={30} src="/delete.png" alt="delete" />
+                                <Image height={24} width={30} src="/delete-fill.png" alt="delete-fill" className="deleted-hover absolute opacity-0" />
                                 <h1> {deletePending ? 'Deleting' : 'Delete'} </h1>
                             </div>
                         </Dropdown>
@@ -178,7 +181,9 @@ export function Note({ note }: { note: NoteType }) {
                 </Link>
             :
                 <div className={`note-hover ${dropShown ? 'note-drop-show' : ''}`}>
-                    <img 
+                    <Image
+                        height={30}
+                        width={30}  
                         src="/dropdown.png" 
                         alt="dropdown" 
                         className="h-[30px] my-[12px] mx-[12px] py-[6px] px-[6px] hover:opacity-70 rounded-full hover:bg-gray-700 cursor-pointer"
@@ -191,8 +196,8 @@ export function Note({ note }: { note: NoteType }) {
                                     e.preventDefault()
                                     await handleUnpin()
                                 }}>
-                                    <img src="/restore.png" alt="restore" />
-                                    <img src="/restore-fill.png" alt="restore-fill" className="restore-hover absolute opacity-0" />
+                                    <Image height={24} width={30} src="/restore.png" alt="restore" />
+                                    <Image height={24} width={30} src="/restore-fill.png" alt="restore-fill" className="restore-hover absolute opacity-0" />
                                     <h1> {unpinPending ? 'Restoring' : 'Restore'} </h1>
                                 </div>
                             </div>
@@ -200,8 +205,8 @@ export function Note({ note }: { note: NoteType }) {
                                 e.preventDefault()
                                 await handleDeleteForever()
                             }}>
-                                <img src="/delete.png" alt="delete" />
-                                <img src="/delete-fill.png" alt="delete-fill" className="deleted-hover absolute opacity-0" />
+                                <Image height={24} width={30} src="/delete.png" alt="delete" />
+                                <Image height={24} width={30} src="/delete-fill.png" alt="delete-fill" className="deleted-hover absolute opacity-0" />
                                 <h1> {deleteForeverPending ? 'Deleting' : 'Delete'} </h1>
                             </div>
                         </Dropdown>
